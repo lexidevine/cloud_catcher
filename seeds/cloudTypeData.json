@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Cirrus",
+    "altitude_range": "High-level (20,000-40,000 ft)",
+    "description": "Thin, wispy streaks made of ice crystals, often called 'mare's tails.' They're the highest clouds in our sky and usually mean fair weather, though they can signal a change coming in the next day or so.",
+    "image_url": "/images/clouds/cirrus.jpg",
+    "fun_fact": "Cirrus clouds are made almost entirely of ice crystals because it's so cold at their altitude, even in summer."
+  },
+  {
+    "name": "Cirrostratus",
+    "altitude_range": "High-level (20,000-40,000 ft)",
+    "description": "A thin, sheet-like veil of ice-crystal cloud that often covers the whole sky, giving it a slightly hazy, milky look.",
+    "image_url": "/images/clouds/cirrostratus.jpg",
+    "fun_fact": "Cirrostratus is what creates the halo you sometimes see around the sun or moon, caused by light bending through its ice crystals."
+  },
+  {
+    "name": "Cirrocumulus",
+    "altitude_range": "High-level (20,000-40,000 ft)",
+    "description": "Small, white, rippled patches high in the sky, often arranged in rows, giving the sky a dappled or 'fish scale' look.",
+    "image_url": "/images/clouds/cirrocumulus.jpg",
+    "fun_fact": "A sky full of cirrocumulus is nicknamed a 'mackerel sky' because the pattern resembles fish scales."
+  },
+  {
+    "name": "Altocumulus",
+    "altitude_range": "Mid-level (6,500-20,000 ft)",
+    "description": "Grayish-white patches or rolls of cloud, usually appearing in groups, with parts of the cloud often more shaded than others.",
+    "image_url": "/images/clouds/altocumulus.jpg",
+    "fun_fact": "Altocumulus clouds appearing on a warm, humid summer morning can be a sign of thunderstorms later that day."
+  },
+  {
+    "name": "Altostratus",
+    "altitude_range": "Mid-level (6,500-20,000 ft)",
+    "description": "A gray or blue-gray sheet covering all or most of the sky, thin enough that the sun may appear as a dim disk behind it.",
+    "image_url": "/images/clouds/altostratus.jpg",
+    "fun_fact": "Altostratus often shows up ahead of a warm front and can thicken into nimbostratus as steady rain approaches."
+  },
+  {
+    "name": "Nimbostratus",
+    "altitude_range": "Low-to-mid level (surface-10,000 ft)",
+    "description": "A thick, dark gray, featureless layer of cloud that blocks out the sun almost entirely and produces continuous, steady rain or snow.",
+    "image_url": "/images/clouds/nimbostratus.jpg",
+    "fun_fact": "The name comes from the Latin 'nimbus' (rain) and 'stratus' (layer) — it's the classic all-day rainy-sky cloud."
+  },
+  {
+    "name": "Stratus",
+    "altitude_range": "Low-level (surface-6,500 ft)",
+    "description": "A flat, featureless gray layer that often blankets the entire sky, similar to fog that doesn't quite reach the ground.",
+    "image_url": "/images/clouds/stratus.jpg",
+    "fun_fact": "Stratus clouds are essentially fog that has lifted slightly off the ground."
+  },
+  {
+    "name": "Stratocumulus",
+    "altitude_range": "Low-level (surface-6,500 ft)",
+    "description": "Large, lumpy, rounded clouds in patches or rows with some blue sky visible between them, one of the most common cloud types worldwide.",
+    "image_url": "/images/clouds/stratocumulus.jpg",
+    "fun_fact": "Stratocumulus is the most commonly observed cloud type on Earth, covering roughly a fifth of the planet's surface at any given time."
+  },
+  {
+    "name": "Cumulus",
+    "altitude_range": "Low-level (surface-6,500 ft)",
+    "description": "Puffy, white, cotton-ball-shaped clouds with flat bottoms and rounded tops, the classic 'fair weather' cloud kids draw in pictures.",
+    "image_url": "/images/clouds/cumulus.jpg",
+    "fun_fact": "A single cumulus cloud can weigh over a million pounds, but it still floats because that weight is spread across a huge volume of air only slightly denser than its surroundings."
+  },
+  {
+    "name": "Cumulonimbus",
+    "altitude_range": "Low-level base, extending to high-level (surface-60,000+ ft)",
+    "description": "Towering, anvil-shaped storm clouds that can stretch from near the ground into the upper atmosphere, producing thunder, lightning, heavy rain, and sometimes hail.",
+    "image_url": "/images/clouds/cumulonimbus.jpg",
+    "fun_fact": "Cumulonimbus is the only cloud type that can produce hail, tornadoes, and lightning, and its flattened top is called an 'anvil.'"
+  }
+]
