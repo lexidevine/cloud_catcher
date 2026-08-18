@@ -1,10 +1,11 @@
 const router = require('express').Router();
-const { Sighting } = require('../models');
+const { Sighting, User } = require('../models');
 
 router.get('/', async (req, res) => {
   try {
     // Get all sightings, sorted by time created from newest to oldest
     const sightingData = await Sighting.findAll({
+      include: [User, CloudType],
       order: [['logged_at', 'DESC']],
     });
 

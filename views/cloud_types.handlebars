@@ -1,0 +1,41 @@
+<section class="page-header">
+  <div>
+    <h2 class="page-title">Cloud Guide</h2>
+    <p class="page-subtitle">
+      What kind of cloud am I looking at? Use this reference to help you become a cloud connoisseur!
+    </p>
+  </div>
+</section>
+<section class="card">
+  <div class="card__header">
+    <h3 class="card__title">Cloud Types</h3>
+    <span class="badge">{{cloudTypes.length}} total</span>
+  </div>
+
+  <div class="list">
+    {{#each cloudTypes as |cloudType|}}
+      <div class="list__row">
+        <div class="list__left">
+          <img
+            src="{{cloudType.image_url}}"
+            alt="{{cloudType.name}}"
+            class="emoji"
+            style="object-fit: cover;"
+          />
+
+          <div>
+            <div class="list__title">{{cloudType.name}}</div>
+            <div class="list__meta">
+              <span class="muted">Altitude Range:</span>
+              <span>{{cloudType.altitude_range}}</span>
+              <span class="muted">Description:</span>
+              <span>{{cloudType.description}}</span>
+              <span class="muted">Fun Fact:</span>
+              <span>{{cloudType.fun_fact}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</section>
