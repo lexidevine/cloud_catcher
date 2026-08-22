@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Sighting, User } = require('../models');
+const { Sighting, User, CloudType } = require('../models');
 
 router.get('/', async (req, res) => {
   try {
@@ -9,11 +9,28 @@ router.get('/', async (req, res) => {
       order: [['logged_at', 'DESC']],
     });
 
+    // Get all users, sorted by name from A to Z
+    const userData = await User.findAll({
+      attributes: { exclude: ['password'] },
+      order: [['name', 'ASC']],
+    });
+
+    // Get all cloud types, sorted by name from A to Z
+    const cloudTypeData = await CloudType.findAll({
+      order: [['name', 'ASC']],
+    });
+
     // Serialize sighting data so templates can read it
     const sightings = sightingData.map((sighting) => sighting.get({ plain: true }));
 
+    // Serialize user data so templates can read it
+    const users = userData.map((project) => project.get({ plain: true }));
+
+    // Serialize cloud type data so templates can read it
+    const cloudTypes = cloudTypeData.map((cloudType) => cloudType.get({ plain: true }));
+
     // Pass serialized data into Handlebars.js template
-    res.render('sightings', { sightings });
+    res.render('sightings', { sightings, users, cloudTypes });
   } catch (err) {
     res.status(500).json(err);
   }

@@ -1,0 +1,68 @@
+<section class="page-header">
+  <div>
+    <h2 class="page-title">Catches</h2>
+    <p class="page-subtitle">Who caught what?</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card__header">
+    <h3 class="card__title">Log a Catch</h3>
+  </div>
+
+  <form method="POST" action="/sightings" class="form">
+    <label for="user_id">Who caught it?</label>
+    <select name="user_id" id="user_id" required>
+      {{#each users as |user|}}
+        <option value="{{user.id}}">{{user.name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="cloud_type_id">Which cloud type?</label>
+    <select name="cloud_type_id" id="cloud_type_id" required>
+      {{#each cloudTypes as |cloudType|}}
+        <option value="{{cloudType.id}}">{{cloudType.name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="location">Location</label>
+    <input type="text" name="location" id="location" placeholder="Backyard, park, etc." required />
+
+    <label for="notes">Notes</label>
+    <input type="text" name="notes" id="notes" placeholder="Optional notes" />
+
+    <input type="hidden" name="lat" id="lat" />
+    <input type="hidden" name="lon" id="lon" />
+
+    <button type="submit" class="btn btn--primary">Log Catch</button>
+  </form>
+</section>
+
+<section class="card">
+  <div class="card__header">
+    <h3 class="card__title">Catches</h3>
+    <span class="badge">{{sightings.length}} total</span>
+  </div>
+
+  <div class="list">
+    {{#each sightings as |sighting|}}
+      <div class="list__row">
+        <div class="list__left">
+          <div>
+            <div class="list__title">{{sighting.cloud_type.name}}</div>
+            <div class="list__meta">
+              <span class="muted">Caught by:</span>
+              <span>{{sighting.user.name}}</span>
+              <span class="muted">Location:</span>
+              <span>{{sighting.location}}</span>
+              {{#if sighting.notes}}
+                <span class="muted">Notes:</span>
+                <span>{{sighting.notes}}</span>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</section>
