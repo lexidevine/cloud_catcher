@@ -261,6 +261,62 @@ body {
   min-width: 80px;
 }
 
+/* Catch list (sightings page) */
+.catch-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.catch-row {
+  display: flex;
+  gap: 18px;
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.catch-row:last-child {
+  border-bottom: none;
+}
+
+.catch-row__photo {
+  width: 110px;
+  height: 110px;
+  border-radius: var(--radius);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.catch-row__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.catch-row__title {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.catch-row__meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 6px 24px;
+}
+
+@media (max-width: 640px) {
+  .catch-row {
+    flex-direction: column;
+  }
+
+  .catch-row__photo {
+    width: 100%;
+    height: 160px;
+  }
+}
+
 .list__right {
   display: flex;
   align-items: center;

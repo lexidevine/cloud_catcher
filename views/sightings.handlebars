@@ -47,35 +47,50 @@
     <span class="badge">{{sightings.length}} total</span>
   </div>
 
-  <div class="list">
+  <div class="catch-list">
     {{#each sightings as |sighting|}}
-      <div class="list__row">
-        <div class="list__left">
-          <div>
-            <div class="list__title">{{sighting.cloud_type.name}}</div>
-            <div class="list__meta">
-              <div class="list__meta-row">
-                <span class="list__meta-label">Caught by</span>
-                <span>{{sighting.user.name}}</span>
-              </div>
-              <div class="list__meta-row">
-                <span class="list__meta-label">Location</span>
-                <span>{{sighting.location}}</span>
-              </div>
-              {{#if sighting.notes}}
-                <div class="list__meta-row">
-                  <span class="list__meta-label">Notes</span>
-                  <span>{{sighting.notes}}</span>
-                </div>
-              {{/if}}
-              {{! Only shows if the weather API call succeeded when this was logged }}
-              {{#if sighting.weather_snapshot}}
-                <div class="list__meta-row">
-                  <span class="list__meta-label">Weather</span>
-                  <span>{{sighting.weather_snapshot.temp}}&deg;F, {{sighting.weather_snapshot.conditions}}</span>
-                </div>
-              {{/if}}
+      <div class="catch-row">
+        <img src="{{sighting.cloud_type.image_url}}" alt="{{sighting.cloud_type.name}}" class="catch-row__photo" />
+        <div class="catch-row__body">
+          <div class="catch-row__title">{{sighting.cloud_type.name}}</div>
+          <div class="catch-row__meta-grid">
+            <div class="list__meta-row">
+              <span class="list__meta-label">Caught by</span>
+              <span>{{sighting.user.name}}</span>
             </div>
+            <div class="list__meta-row">
+              <span class="list__meta-label">Location</span>
+              <span>{{sighting.location}}</span>
+            </div>
+            {{#if sighting.notes}}
+              <div class="list__meta-row">
+                <span class="list__meta-label">Notes</span>
+                <span>{{sighting.notes}}</span>
+              </div>
+            {{/if}}
+            {{! Only shows if the weather API call succeeded when this was logged }}
+            {{#if sighting.weather_snapshot}}
+              <div class="list__meta-row">
+                <span class="list__meta-label">Weather</span>
+                <span>{{sighting.weather_snapshot.temp}}&deg;F, {{sighting.weather_snapshot.conditions}}</span>
+              </div>
+              <div class="list__meta-row">
+                <span class="list__meta-label">Cloud Cover</span>
+                <span>{{sighting.weather_snapshot.cloud_cover}}%</span>
+              </div>
+              <div class="list__meta-row">
+                <span class="list__meta-label">Humidity</span>
+                <span>{{sighting.weather_snapshot.humidity}}%</span>
+              </div>
+              <div class="list__meta-row">
+                <span class="list__meta-label">Wind</span>
+                <span>{{sighting.weather_snapshot.wind_speed}} mph at {{sighting.weather_snapshot.wind_degrees}}&deg;</span>
+              </div>
+              <div class="list__meta-row">
+                <span class="list__meta-label">Pressure</span>
+                <span>{{sighting.weather_snapshot.air_pressure}} hPa</span>
+              </div>
+            {{/if}}
           </div>
         </div>
       </div>
