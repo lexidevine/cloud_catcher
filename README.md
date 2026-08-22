@@ -4,7 +4,7 @@ A full-stack web app for people who love clouds. Browse a reference guide to lea
 
 ## Description
 
-Cloud Catcher was built as a Project 2 solo full-stack application. The idea started from a girl who's always looking up at the sky wondering what she's looking at. I wanted a simple, fun way to actually learn to identify clouds in the moment by comparing what's in the sky to a reference guide, then keep a personal log of every cloud "caught" over time. A future version (planned for a later project) would add social and organizational features — trading clouds, sorting and filtering catches, viewing other users' collections, and more direct interaction between users.
+Cloud Catcher is a full-stack application. The idea started from a girl who's always looking up at the sky wondering what she's looking at. I wanted a simple, fun way to actually learn to identify clouds in the moment by comparing what's in the sky to a reference guide, then keep a personal log of every cloud "caught" over time. A future version (planned for a later project) would add social and organizational features — trading clouds, sorting and filtering catches, viewing other users' collections, and more direct interaction between users.
 
 **Core features:**
 - **Cloud Guide** — browse real cloud genera (Cirrus, Cumulonimbus, Stratus, and more) with altitude, description, and a fun fact for each.
@@ -18,7 +18,7 @@ Cloud Catcher was built as a Project 2 solo full-stack application. The idea sta
 - **Handlebars.js** — server-rendered templating (MVC view layer)
 - **PostgreSQL** — relational database
 - **Sequelize** — ORM for models, associations, and queries
-- **OpenWeatherMap API** — external API integration (exploration requirement)
+- **OpenWeatherMap API** — external API integration
 - **Browser Geolocation API** — captures user coordinates client-side
 - **bcrypt** — password hashing for stored user records
 - **dotenv** — environment variable management
