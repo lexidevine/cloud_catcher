@@ -5,12 +5,14 @@
   </div>
 </section>
 
+{{! Form that submits to POST /sightings in controllers/sightingRoutes.js }}
 <section class="card">
   <div class="card__header">
     <h3 class="card__title">Log a Catch</h3>
   </div>
 
   <form method="POST" action="/sightings" class="form">
+    {{! Dropdown built from every user in the users table }}
     <label for="user_id">Who caught it?</label>
     <select name="user_id" id="user_id" required>
       {{#each users as |user|}}
@@ -31,6 +33,7 @@
     <label for="notes">Notes</label>
     <input type="text" name="notes" id="notes" placeholder="Optional notes" />
 
+    {{! Filled in automatically by public/js/geolocation.js before submit }}
     <input type="hidden" name="lat" id="lat" />
     <input type="hidden" name="lon" id="lon" />
 
@@ -51,13 +54,26 @@
           <div>
             <div class="list__title">{{sighting.cloud_type.name}}</div>
             <div class="list__meta">
-              <span class="muted">Caught by:</span>
-              <span>{{sighting.user.name}}</span>
-              <span class="muted">Location:</span>
-              <span>{{sighting.location}}</span>
+              <div class="list__meta-row">
+                <span class="list__meta-label">Caught by</span>
+                <span>{{sighting.user.name}}</span>
+              </div>
+              <div class="list__meta-row">
+                <span class="list__meta-label">Location</span>
+                <span>{{sighting.location}}</span>
+              </div>
               {{#if sighting.notes}}
-                <span class="muted">Notes:</span>
-                <span>{{sighting.notes}}</span>
+                <div class="list__meta-row">
+                  <span class="list__meta-label">Notes</span>
+                  <span>{{sighting.notes}}</span>
+                </div>
+              {{/if}}
+              {{! Only shows if the weather API call succeeded when this was logged }}
+              {{#if sighting.weather_snapshot}}
+                <div class="list__meta-row">
+                  <span class="list__meta-label">Weather</span>
+                  <span>{{sighting.weather_snapshot.temp}}&deg;F, {{sighting.weather_snapshot.conditions}}</span>
+                </div>
               {{/if}}
             </div>
           </div>

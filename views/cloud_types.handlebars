@@ -6,36 +6,19 @@
     </p>
   </div>
 </section>
-<section class="card">
-  <div class="card__header">
-    <h3 class="card__title">Cloud Types</h3>
-    <span class="badge">{{cloudTypes.length}} total</span>
-  </div>
-
-  <div class="list">
-    {{#each cloudTypes as |cloudType|}}
-      <div class="list__row">
-        <div class="list__left">
-          <img
-            src="{{cloudType.image_url}}"
-            alt="{{cloudType.name}}"
-            class="emoji"
-            style="object-fit: cover;"
-          />
-
-          <div>
-            <div class="list__title">{{cloudType.name}}</div>
-            <div class="list__meta">
-              <span class="muted">Altitude Range:</span>
-              <span>{{cloudType.altitude_range}}</span>
-              <span class="muted">Description:</span>
-              <span>{{cloudType.description}}</span>
-              <span class="muted">Fun Fact:</span>
-              <span>{{cloudType.fun_fact}}</span>
-            </div>
-          </div>
-        </div>
+{{! Photo-card grid: each card uses the cloud type's real photo as a full
+    background image, with a gradient overlay so the text stays readable }}
+<div class="cloud-grid">
+  {{#each cloudTypes as |cloudType|}}
+    <div class="cloud-card">
+      <img src="{{cloudType.image_url}}" alt="{{cloudType.name}}" class="cloud-card__bg" />
+      <div class="cloud-card__overlay"></div>
+      <div class="cloud-card__content">
+        <h3 class="cloud-card__title">{{cloudType.name}}</h3>
+        <p class="cloud-card__meta">{{cloudType.altitude_range}}</p>
+        <p class="cloud-card__desc">{{cloudType.description}}</p>
+        <p class="cloud-card__fact">{{cloudType.fun_fact}}</p>
       </div>
-    {{/each}}
-  </div>
-</section>
+    </div>
+  {{/each}}
+</div>
