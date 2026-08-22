@@ -26,10 +26,10 @@ Cloud Catcher was built as a Project 2 solo full-stack application. The idea sta
 
 ## Screenshots
 
-<!-- Add screenshots here, e.g.: -->
-<!-- ![Homepage](./screenshots/homepage.png) -->
-<!-- ![Cloud Guide](./screenshots/cloud-guide.png) -->
-<!-- ![Catch Log](./screenshots/catches.png) -->
+![Homepage](./screenshots/homepage.png)
+![Cloud Guide](./screenshots/cloud-guide.png)
+![Catch Form](./screenshots/catches-form.png)
+![Catch Log](./screenshots/catches.png)
 
 ## Live Application
 
