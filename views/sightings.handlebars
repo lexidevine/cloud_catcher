@@ -62,12 +62,10 @@
               <span class="list__meta-label">Location</span>
               <span>{{sighting.location}}</span>
             </div>
-            {{#if sighting.notes}}
-              <div class="list__meta-row">
-                <span class="list__meta-label">Notes</span>
-                <span>{{sighting.notes}}</span>
-              </div>
-            {{/if}}
+            <div class="list__meta-row">
+              <span class="list__meta-label">Notes</span>
+              <span>{{#if sighting.notes}}{{sighting.notes}}{{else}}&mdash;{{/if}}</span>
+            </div>
             {{! Only shows if the weather API call succeeded when this was logged }}
             {{#if sighting.weather_snapshot}}
               <div class="list__meta-row">
