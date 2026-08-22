@@ -1,6 +1,13 @@
 const router = require('express').Router();
 const { Sighting, User, CloudType } = require('../models');
 
+// Converts compass degrees (0-360) into a directional text (ex: "NE")
+function degreesToCompass(deg) {
+  const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+  const index = Math.round(deg / 45) % 8;
+  return directions[index];
+}
+
 router.get('/', async (req, res) => {
   try {
     // Get all sightings, sorted by time created from newest to oldest
@@ -50,12 +57,12 @@ router.post('/', async (req, res) => {
         const weatherData = await weatherResponse.json();
 
         weather_snapshot = {
-          temp: weatherData.main.temp,
+          temp: Math.round(weatherData.main.temp),
           conditions: weatherData.weather[0].description,
           cloud_cover: weatherData.clouds.all,
           humidity: weatherData.main.humidity,
-          wind_speed: weatherData.wind.speed,
-          wind_degrees: weatherData.wind.deg,
+          wind_speed: Math.round(weatherData.wind.speed),
+          wind_direction: degreesToCompass(weatherData.wind.deg),
           air_pressure: weatherData.main.pressure,
         };
       } catch (weatherErr) {

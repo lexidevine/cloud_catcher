@@ -5,14 +5,14 @@
     "logged_at": "2026-07-22T08:15:00Z",
     "location": "Backyard",
     "notes": "Beautiful shape",
-    "weather_snapshot": { "temp": 78, "conditions": "Partly Cloudy", "cloud_cover": 40, "humidity": 55, "wind_speed": 6, "wind_degrees": 210, "air_pressure": 1014 }
+    "weather_snapshot": { "temp": 78, "conditions": "Partly Cloudy", "cloud_cover": 40, "humidity": 55, "wind_speed": 6, "wind_direction": "SW", "air_pressure": 1014 }
   },
   {
     "user_id": 2,
     "cloud_type_id": 8,
     "logged_at": "2026-07-22T13:40:00Z",
     "location": "Park",
-    "weather_snapshot": { "temp": 82, "conditions": "Sunny", "cloud_cover": 15, "humidity": 48, "wind_speed": 4, "wind_degrees": 180, "air_pressure": 1018 }
+    "weather_snapshot": { "temp": 82, "conditions": "Sunny", "cloud_cover": 15, "humidity": 48, "wind_speed": 4, "wind_direction": "S", "air_pressure": 1018 }
   },
   {
     "user_id": 3,
@@ -20,7 +20,7 @@
     "logged_at": "2026-08-02T18:05:00Z",
     "location": "Driving",
     "notes": "Cool",
-    "weather_snapshot": { "temp": 75, "conditions": "Overcast", "cloud_cover": 90, "humidity": 70, "wind_speed": 9, "wind_degrees": 260, "air_pressure": 1008 }
+    "weather_snapshot": { "temp": 75, "conditions": "Overcast", "cloud_cover": 90, "humidity": 70, "wind_speed": 9, "wind_direction": "W", "air_pressure": 1008 }
   },
   {
     "user_id": 4,
@@ -28,7 +28,7 @@
     "logged_at": "2026-08-07T10:30:00Z",
     "location": "Work",
     "notes": "Wow",
-    "weather_snapshot": { "temp": 88, "conditions": "Clear", "cloud_cover": 5, "humidity": 40, "wind_speed": 3, "wind_degrees": 140, "air_pressure": 1021 }
+    "weather_snapshot": { "temp": 88, "conditions": "Clear", "cloud_cover": 5, "humidity": 40, "wind_speed": 3, "wind_direction": "SE", "air_pressure": 1021 }
   },
   {
     "user_id": 5,
@@ -36,6 +36,6 @@
     "logged_at": "2026-08-07T15:27:00Z",
     "location": "Somewhere else",
     "notes": "Amazing",
-    "weather_snapshot": { "temp": 80, "conditions": "Scattered Clouds", "cloud_cover": 35, "humidity": 60, "wind_speed": 7, "wind_degrees": 300, "air_pressure": 1012 }
+    "weather_snapshot": { "temp": 80, "conditions": "Scattered Clouds", "cloud_cover": 35, "humidity": 60, "wind_speed": 7, "wind_direction": "NW", "air_pressure": 1012 }
   }
 ]
