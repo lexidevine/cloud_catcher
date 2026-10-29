@@ -15,4 +15,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Show the login/signup page
+router.get('/login', (req, res) => {
+  // Already logged in? No need for the login page, send them home
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+
+  // isLogin tells the nav bar (main.handlebars) to highlight "Log in" as active
+  res.render('login', { isLogin: true });
+});
+
 module.exports = router;

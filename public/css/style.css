@@ -124,6 +124,17 @@ body {
   pointer-events: none;
 }
 
+/* Log out button: a real button (for POST) styled to look like the other nav links */
+.nav__form {
+  margin: 0;
+}
+
+.nav__button {
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
 /* Page header */
 .page-header {
   margin: 26px 0 16px;

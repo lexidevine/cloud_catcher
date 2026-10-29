@@ -1,0 +1,44 @@
+<section class="page-header">
+  <div>
+    <h2 class="page-title">Welcome</h2>
+    <p class="page-subtitle">Log in or create an account to start catching clouds.</p>
+  </div>
+</section>
+
+{{! Form that submits to POST /users/login in controllers/userRoutes.js }}
+<section class="card">
+  <div class="card__header">
+    <h3 class="card__title">Log In</h3>
+  </div>
+
+  <form method="POST" action="/users/login" class="form">
+    <label for="login-email">Email</label>
+    <input type="email" name="email" id="login-email" required />
+
+    <label for="login-password">Password</label>
+    <input type="password" name="password" id="login-password" required />
+
+    <button type="submit" class="btn btn--primary">Log In</button>
+  </form>
+</section>
+
+{{! Form that submits to POST /users/signup in controllers/userRoutes.js }}
+<section class="card">
+  <div class="card__header">
+    <h3 class="card__title">Sign Up</h3>
+  </div>
+
+  <form method="POST" action="/users/signup" class="form">
+    <label for="signup-name">Name</label>
+    <input type="text" name="name" id="signup-name" required />
+
+    <label for="signup-email">Email</label>
+    <input type="email" name="email" id="signup-email" required />
+
+    {{! minlength matches the len: [8] rule in models/User.js }}
+    <label for="signup-password">Password</label>
+    <input type="password" name="password" id="signup-password" minlength="8" placeholder="At least 8 characters" required />
+
+    <button type="submit" class="btn btn--primary">Sign Up</button>
+  </form>
+</section>

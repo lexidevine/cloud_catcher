@@ -25,7 +25,7 @@ const sess = {
 };
 
 app.set("trust proxy", 1); // Render sits in front of your app; this lets secure cookies work there
-app.use(session(sess)); // Sessions must be turned on before route reads it on line 39
+app.use(session(sess)); // Sessions must be turned on before the code below reads req.session
 
 const hbs = exphbs.create({ helpers });
 
@@ -35,6 +35,12 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+
+// Lets every Handlebars page check {{logged_in}} without passing it in each res.render
+app.use((req, res, next) => {
+  res.locals.logged_in = req.session.logged_in;
+  next();
+});
 
 app.use(routes);
 
