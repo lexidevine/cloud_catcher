@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Sighting, User, CloudType } = require('../models');
+const withAuth = require('../utils/auth');
 
 // Converts compass degrees (0-360) into a directional text (ex: "NE")
 function degreesToCompass(deg) {
@@ -16,12 +17,6 @@ router.get('/', async (req, res) => {
       order: [['logged_at', 'DESC']],
     });
 
-    // Get all users, sorted by name from A to Z
-    const userData = await User.findAll({
-      attributes: { exclude: ['password'] },
-      order: [['name', 'ASC']],
-    });
-
     // Get all cloud types, sorted by name from A to Z
     const cloudTypeData = await CloudType.findAll({
       order: [['name', 'ASC']],
@@ -30,21 +25,18 @@ router.get('/', async (req, res) => {
     // Serialize sighting data so templates can read it
     const sightings = sightingData.map((sighting) => sighting.get({ plain: true }));
 
-    // Serialize user data so templates can read it
-    const users = userData.map((project) => project.get({ plain: true }));
-
     // Serialize cloud type data so templates can read it
     const cloudTypes = cloudTypeData.map((cloudType) => cloudType.get({ plain: true }));
 
     // Pass serialized data into Handlebars.js template
-    res.render('sightings', { sightings, users, cloudTypes });
+    res.render('sightings', { sightings, cloudTypes });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // CREATE a sighting
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const { lat, lon } = req.body;
     let weather_snapshot = null;
@@ -72,7 +64,7 @@ router.post('/', async (req, res) => {
     }
 
     const newSighting = await Sighting.create({
-      user_id: req.body.user_id,
+      user_id: req.session.user_id,
       cloud_type_id: req.body.cloud_type_id,
       location: req.body.location,
       notes: req.body.notes,

@@ -6,19 +6,13 @@
 </section>
 
 {{! Form that submits to POST /sightings in controllers/sightingRoutes.js }}
+{{#if logged_in}}
 <section class="card">
   <div class="card__header">
     <h3 class="card__title">Log a Catch</h3>
   </div>
 
   <form method="POST" action="/sightings" class="form">
-    {{! Dropdown built from every user in the users table }}
-    <label for="user_id">Who caught it?</label>
-    <select name="user_id" id="user_id" required>
-      {{#each users as |user|}}
-        <option value="{{user.id}}">{{user.name}}</option>
-      {{/each}}
-    </select>
 
     <label for="cloud_type_id">Which cloud type?</label>
     <select name="cloud_type_id" id="cloud_type_id" required>
@@ -40,6 +34,10 @@
     <button type="submit" class="btn btn--primary">Log Catch</button>
   </form>
 </section>
+
+{{else}}
+  <p class="hint"><a href="/login">Log in</a> to log a catch.</p>
+{{/if}}
 
 <section class="card">
   <div class="card__header">
