@@ -1,26 +1,31 @@
 [
   {
     "name": "Alex",
+    "username": "alex_clouds",
     "email": "alex.museum@gmail.com",
     "password": "password12345"
   },
   {
     "name": "Priya",
+    "username": "priya_clouds",
     "email": "priya.art@outlook.com",
     "password": "password12345"
   },
   {
     "name": "Marco",
+    "username": "marco_clouds",
     "email": "marco.gallery@yahoo.com",
     "password": "password12345"
   },
   {
     "name": "Sofia",
+    "username": "sofia_clouds",
     "email": "sofia.curator@icloud.com",
     "password": "password12345"
   },
   {
     "name": "Ethan",
+    "username": "ethan_clouds",
     "email": "ethan.visitor@protonmail.com",
     "password": "password12345"
   }

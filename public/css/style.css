@@ -531,19 +531,33 @@ body {
 
 /* Hint panel */
 .hint {
-  margin-top: 16px;
-  padding: 14px 16px;
-  border-radius: var(--radius);
-  border: 1px dashed rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.04);
+  margin-top: -4px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px dashed var(--accent-purple);
+  background: var(--panel-2);
 }
 
 .hint__title {
-  margin: 0 0 8px;
-  font-size: 14px;
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .hint__list {
   margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
   color: var(--muted);
+}
+
+/* Form error message */
+.form-error {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #f9a8c4;
+  background: #fff1f5;
+  color: #9d174d;
+  font-size: 14px;
 }

@@ -7,7 +7,8 @@ router.post('/signup', async (req, res) => {
     // Make the user. User model scrambles the password automatically
     const userData = await User.create({
       name: req.body.name,
-      email: req.body.email,
+      username: req.body.username.trim().toLowerCase(),
+      email: req.body.email.trim().toLowerCase(),
       password: req.body.password,
     });
 
@@ -20,7 +21,15 @@ router.post('/signup', async (req, res) => {
       res.redirect('/');
     });
   } catch (err) {
-    res.status(400).json(err);
+    console.log(err);
+
+    let signupError = 'Something went wrong. Please check your info and try again.';
+
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      signupError = 'That username or email is already taken.';
+    }
+
+    res.status(400).render('login', { isLogin: true, signupError });
   }
 });
 
@@ -29,7 +38,7 @@ router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({
       where: {
-        email: req.body.email,
+        email: req.body.email.trim().toLowerCase(),
       },
     });
 

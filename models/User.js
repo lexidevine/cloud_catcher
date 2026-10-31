@@ -20,6 +20,15 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        len: [3, 20],
+        is: /^[a-z0-9_]+$/,
+      },
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,

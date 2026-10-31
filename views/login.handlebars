@@ -29,8 +29,23 @@
   </div>
 
   <form method="POST" action="/users/signup" class="form">
-    <label for="signup-name">Name</label>
-    <input type="text" name="name" id="signup-name" required />
+    {{#if signupError}}
+      <p class="form-error" role="alert">{{signupError}}</p>
+    {{/if}}
+
+    <label for="signup-name">Display Name</label>
+    <input type="text" name="name" id="signup-name" placeholder="ex: Lexi" required />
+
+    <label for="signup-username">Username</label>
+    <input type="text" name="username" id="signup-username" pattern="[A-Za-z0-9_]{3,20}" title="3 to 20 letters, numbers, or underscores" placeholder="ex: cirrus_lexi" required />
+    <div class="hint">
+      <p class="hint__title">Username requirements</p>
+      <ul class="hint__list">
+        <li>3 to 20 characters</li>
+        <li>Letters, numbers, and underscore (_) only</li>
+        <li>No spaces or symbols</li>
+      </ul>
+    </div>
 
     <label for="signup-email">Email</label>
     <input type="email" name="email" id="signup-email" required />
