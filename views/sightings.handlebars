@@ -13,6 +13,10 @@
   </div>
 
   <form method="POST" action="/sightings" enctype="multipart/form-data" class="form">
+  
+    {{#if uploadError}}
+      <p class="form-error" role="alert">{{uploadError}}</p>
+    {{/if}}
 
     <label for="cloud_type_id">Which cloud type?</label>
     <select name="cloud_type_id" id="cloud_type_id" required>

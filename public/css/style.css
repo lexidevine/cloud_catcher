@@ -557,8 +557,8 @@ body {
   margin: 0;
   padding: 10px 14px;
   border-radius: 12px;
-  border: 1px solid #f9a8c4;
-  background: #fff1f5;
-  color: #9d174d;
+  border: 1px solid var(--accent-purple);
+  background: #f5f0ff;
+  color: #5b21b6;
   font-size: 14px;
 }

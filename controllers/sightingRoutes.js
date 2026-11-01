@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Sighting, User, CloudType } = require('../models');
 const withAuth = require('../utils/auth');
-const { upload, uploadToCloudinary } = require('../utils/upload'); 
+const { uploadPhoto, uploadToCloudinary } = require('../utils/upload'); 
 
 // Converts compass degrees (0-360) into a directional text (ex: "NE")
 function degreesToCompass(deg) {
@@ -29,15 +29,18 @@ router.get('/', async (req, res) => {
     // Serialize cloud type data so templates can read it
     const cloudTypes = cloudTypeData.map((cloudType) => cloudType.get({ plain: true }));
 
-    // Pass serialized data into Handlebars.js template
-    res.render('sightings', { sightings, cloudTypes });
+    //Read the note, then throwi taway so it only shows once
+    const uploadError = req.session.uploadError;
+    delete req.session.uploadError;
+
+    res.render('sightings', { sightings, cloudTypes, uploadError });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // CREATE a sighting
-router.post('/', withAuth, upload.single('photo'), async (req, res) => {
+router.post('/', withAuth, uploadPhoto, async (req, res) => {
   try {
     const { lat, lon } = req.body;
     let weather_snapshot = null;
@@ -82,7 +85,12 @@ router.post('/', withAuth, upload.single('photo'), async (req, res) => {
 
     res.redirect('/sightings');
   } catch (err) {
-    res.status(500).json(err);
+    console.log(err);
+    req.session.uploadError = 'Oopsie! Something went wrong logging your catch. Please try again.';
+
+    req.session.save(() => {
+      res.redirect('/sightings');
+    });
   }
 });
 

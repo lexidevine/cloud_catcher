@@ -22,6 +22,25 @@ const upload = multer({
   },
 });
 
+// Runs the mailroom, and handles it if a photo gets turned away
+const uploadPhoto = (req, res, next) => {
+  upload.single('photo')(req, res, (err) => {
+    if (err) {
+      req.session.uploadError =
+        err.code === 'LIMIT_FILE_SIZE'
+          ? 'That cloud is too big! Please choose one under 10 MB.'
+          : 'We only catch photos here! Pick a pic to upload.';
+
+      req.session.save(() => {
+        res.redirect('/sightings');
+      });
+      return;
+    }
+
+    next();
+  });
+};
+
 // Sends the photo to Cloudinary and gives back its web address
 const uploadToCloudinary = (fileBuffer) => {
   return new Promise((resolve, reject) => {
@@ -44,4 +63,4 @@ const uploadToCloudinary = (fileBuffer) => {
   });
 };
 
-module.exports = { upload, uploadToCloudinary };
+module.exports = { uploadPhoto, uploadToCloudinary };
