@@ -33,6 +33,10 @@ Sighting.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    image_url: {
+      type: DataTypes.STRING,
+      allowNull: true, // Photos are optional. Catches without one show the stock cloud photo
+    },
     weather_snapshot: {
       type: DataTypes.JSON,
       allowNull: true, // In case API is slow, down, or the fetch fails. This will still log  sighting if the API call fails
