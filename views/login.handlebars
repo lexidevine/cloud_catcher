@@ -12,6 +12,10 @@
   </div>
 
   <form method="POST" action="/users/login" class="form">
+    {{#if loginError}}
+      <p class="form-error" role="alert">{{loginError}}</p>
+    {{/if}}
+
     <label for="login-email">Email</label>
     <input type="email" name="email" id="login-email" required />
 

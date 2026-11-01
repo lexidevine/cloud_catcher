@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Sighting, User, CloudType } = require('../models');
 const withAuth = require('../utils/auth');
+const { upload, uploadToCloudinary } = require('../utils/upload'); 
 
 // Converts compass degrees (0-360) into a directional text (ex: "NE")
 function degreesToCompass(deg) {
@@ -36,7 +37,7 @@ router.get('/', async (req, res) => {
 });
 
 // CREATE a sighting
-router.post('/', withAuth, async (req, res) => {
+router.post('/', withAuth, upload.single('photo'), async (req, res) => {
   try {
     const { lat, lon } = req.body;
     let weather_snapshot = null;
@@ -63,11 +64,19 @@ router.post('/', withAuth, async (req, res) => {
       }
     }
 
+    let image_url = null;
+
+    //Only upload if the person added a photo
+    if (req.file) {
+      image_url = await uploadToCloudinary(req.file.buffer);
+    }
+
     const newSighting = await Sighting.create({
       user_id: req.session.user_id,
       cloud_type_id: req.body.cloud_type_id,
       location: req.body.location,
       notes: req.body.notes,
+      image_url,
       weather_snapshot,
     });
 

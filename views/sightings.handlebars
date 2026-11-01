@@ -12,7 +12,7 @@
     <h3 class="card__title">Log a Catch</h3>
   </div>
 
-  <form method="POST" action="/sightings" class="form">
+  <form method="POST" action="/sightings" enctype="multipart/form-data" class="form">
 
     <label for="cloud_type_id">Which cloud type?</label>
     <select name="cloud_type_id" id="cloud_type_id" required>
@@ -26,6 +26,9 @@
 
     <label for="notes">Notes</label>
     <input type="text" name="notes" id="notes" placeholder="Optional notes" />
+
+    <label for="photo">Photo (optional)</label>
+    <input type="file" name="photo" id="photo" accept="image/*" />
 
     {{! Filled in automatically by public/js/geolocation.js before submit }}
     <input type="hidden" name="lat" id="lat" />
@@ -48,7 +51,7 @@
   <div class="catch-list">
     {{#each sightings as |sighting|}}
       <div class="catch-row">
-        <img src="{{sighting.cloud_type.image_url}}" alt="{{sighting.cloud_type.name}}" class="catch-row__photo" />
+        <img src="{{#if sighting.image_url}}{{sighting.image_url}}{{else}}{{sighting.cloud_type.image_url}}{{/if}}" alt="{{sighting.cloud_type.name}}" class="catch-row__photo" />
         <div class="catch-row__body">
           <div class="catch-row__title">{{sighting.cloud_type.name}}</div>
           <div class="catch-row__meta-grid">
