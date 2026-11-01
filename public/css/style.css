@@ -127,6 +127,7 @@ body {
 /* Log out button: a real button (for POST) styled to look like the other nav links */
 .nav__form {
   margin: 0;
+  width: auto;
 }
 
 .nav__button {
