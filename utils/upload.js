@@ -51,6 +51,36 @@ const cleanPhoto = (fileBuffer) => {
     .toBuffer();
 };
 
+// Asks Sightengine if a photo is safe to post
+const isPhotoSafe = async (fileBuffer) => {
+  const form = new FormData();
+  form.append('media', new Blob([fileBuffer], { type: 'image/jpeg' }), 'photo.jpg');
+  form.append('models', 'nudity-2.1,gore-2.0,violence');
+  form.append('api_user', process.env.SIGHTENGINE_API_USER);
+  form.append('api_secret', process.env.SIGHTENGINE_API_SECRET);
+
+  const response = await fetch('https://api.sightengine.com/1.0/check.json', {
+    method: 'POST',
+    body: form,
+  });
+  const result = await response.json();
+
+  // If the check didn't work, don't assume the photo is safe
+  if (result.status !== 'success') {
+    throw new Error('Photo check failed');
+  }
+
+  const limit = 0.5;
+
+  return (
+    result.nudity.sexual_activity < limit &&
+    result.nudity.sexual_display < limit &&
+    result.nudity.erotica < limit &&
+    result.gore.prob < limit &&
+    result.violence.prob < limit
+  );
+};
+
 // Sends the photo to Cloudinary and gives back its web address
 const uploadToCloudinary = (fileBuffer) => {
   return new Promise((resolve, reject) => {
@@ -72,4 +102,4 @@ const uploadToCloudinary = (fileBuffer) => {
   });
 };
 
-module.exports = { uploadPhoto, cleanPhoto, uploadToCloudinary };
+module.exports = { uploadPhoto, cleanPhoto, isPhotoSafe, uploadToCloudinary };
