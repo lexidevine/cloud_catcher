@@ -1,5 +1,6 @@
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
+const sharp = require('sharp');
 
 // Connects to Cloudinary account using the keys in .env
 cloudinary.config({
@@ -41,13 +42,21 @@ const uploadPhoto = (req, res, next) => {
   });
 };
 
+// Removes hidden data like GPS location, and shrinks huge photos
+const cleanPhoto = (fileBuffer) => {
+  return sharp(fileBuffer)
+    .rotate()
+    .resize({ width: 1600, withoutEnlargement: true })
+    .jpeg({ quality: 80 })
+    .toBuffer();
+};
+
 // Sends the photo to Cloudinary and gives back its web address
 const uploadToCloudinary = (fileBuffer) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       {
         folder: 'cloud_catcher',
-        transformation: [{ width: 1600, crop: 'limit', quality: 'auto' }],
       },
       (err, result) => {
         if (err) {
@@ -63,4 +72,4 @@ const uploadToCloudinary = (fileBuffer) => {
   });
 };
 
-module.exports = { uploadPhoto, uploadToCloudinary };
+module.exports = { uploadPhoto, cleanPhoto, uploadToCloudinary };

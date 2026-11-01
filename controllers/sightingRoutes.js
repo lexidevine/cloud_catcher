@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Sighting, User, CloudType } = require('../models');
 const withAuth = require('../utils/auth');
-const { uploadPhoto, uploadToCloudinary } = require('../utils/upload'); 
+const { uploadPhoto, cleanPhoto, uploadToCloudinary } = require('../utils/upload'); 
 
 // Converts compass degrees (0-360) into a directional text (ex: "NE")
 function degreesToCompass(deg) {
@@ -71,7 +71,8 @@ router.post('/', withAuth, uploadPhoto, async (req, res) => {
 
     //Only upload if the person added a photo
     if (req.file) {
-      image_url = await uploadToCloudinary(req.file.buffer);
+      const cleanedPhoto = await cleanPhoto(req.file.buffer);
+      image_url = await uploadToCloudinary(cleanedPhoto);
     }
 
     const newSighting = await Sighting.create({
