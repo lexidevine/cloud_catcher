@@ -1,7 +1,7 @@
 <section class="page-header">
   <div>
     <h2 class="page-title">Catches</h2>
-    <p class="page-subtitle">Who caught what?</p>
+    <p class="page-subtitle">What's up there?</p>
   </div>
 </section>
 
@@ -49,60 +49,45 @@
 <section class="card">
   <div class="card__header">
     <h3 class="card__title">Catches</h3>
-    <span class="badge">{{sightings.length}} total</span>
+    {{!-- <span class="badge">{{sightings.length}} total</span> --}}
   </div>
 
   <div class="catch-list">
     {{#each sightings as |sighting|}}
-      <div class="catch-row">
-        <img src="{{#if sighting.image_url}}{{sighting.image_url}}{{else}}{{sighting.cloud_type.image_url}}{{/if}}" alt="{{sighting.cloud_type.name}}" class="catch-row__photo" />
-        <div class="catch-row__body">
-          <div class="catch-row__title">{{sighting.cloud_type.name}}</div>
-          <div class="catch-row__meta-grid">
-            <div class="list__meta-row">
-              <span class="list__meta-label">Caught by</span>
-              <span>{{sighting.user.name}}</span>
-            </div>
-            <div class="list__meta-row">
-              <span class="list__meta-label">Location</span>
-              <span>{{sighting.location}}</span>
-            </div>
-            <div class="list__meta-row">
-              <span class="list__meta-label">Notes</span>
-              <span>{{#if sighting.notes}}{{sighting.notes}}{{else}}&mdash;{{/if}}</span>
-            </div>
+      <article class="catch-card">
+        <img src="{{#if sighting.image_url}}{{sighting.image_url}}{{else}}{{sighting.cloud_type.image_url}}{{/if}}" alt="{{sighting.cloud_type.name}}" class="catch-card__photo" />
+
+        <div class="catch-card__body">
+          <h4 class="catch-card__title">{{sighting.cloud_type.name}}</h4>
+          <p class="catch-card__caught-by">caught by {{sighting.user.name}}</p>
+
+          <p class="catch-card__details">
+            {{sighting.location}}{{#if sighting.notes}} &middot; {{sighting.notes}}{{/if}}
+          </p>
+
+          <div class="catch-card__footer">
             {{! Only shows if the weather API call succeeded when this was logged }}
             {{#if sighting.weather_snapshot}}
-              <div class="list__meta-row">
-                <span class="list__meta-label">Weather</span>
-                <span>{{sighting.weather_snapshot.temp}}&deg;F, {{sighting.weather_snapshot.conditions}}</span>
-              </div>
-              <div class="list__meta-row">
-                <span class="list__meta-label">Cloud Cover</span>
-                <span>{{sighting.weather_snapshot.cloud_cover}}%</span>
-              </div>
-              <div class="list__meta-row">
-                <span class="list__meta-label">Humidity</span>
-                <span>{{sighting.weather_snapshot.humidity}}%</span>
-              </div>
-              <div class="list__meta-row">
-                <span class="list__meta-label">Wind</span>
-                <span>{{sighting.weather_snapshot.wind_speed}} mph {{sighting.weather_snapshot.wind_direction}}</span>
-              </div>
-              <div class="list__meta-row">
-                <span class="list__meta-label">Pressure</span>
-                <span>{{sighting.weather_snapshot.air_pressure}} hPa</span>
-              </div>
+              <details class="catch-card__weather">
+                <summary>Weather details</summary>
+                <ul>
+                  <li>{{sighting.weather_snapshot.temp}}&deg;F, {{sighting.weather_snapshot.conditions}}</li>
+                  <li>{{sighting.weather_snapshot.cloud_cover}}% cloud cover</li>
+                  <li>{{sighting.weather_snapshot.humidity}}% humidity</li>
+                  <li>Wind {{sighting.weather_snapshot.wind_speed}} mph {{sighting.weather_snapshot.wind_direction}}</li>
+                  <li>{{sighting.weather_snapshot.air_pressure}} hPa pressure</li>
+                </ul>
+              </details>
             {{/if}}
-          {{! Delete button }}
+
+            {{#if sighting.canDelete}}
+              <form method="POST" action="/sightings/{{sighting.id}}/delete" class="catch-card__delete" onsubmit="return confirm('Let this cloud float away forever?');">
+                <button type="submit" class="btn catch-card__delete-btn">Delete</button>
+              </form>
+            {{/if}}
           </div>
-          {{#if sighting.canDelete}}
-            <form method="POST" action="/sightings/{{sighting.id}}/delete" class="catch-row__delete" onsubmit="return confirm('Let this cloud float away forever?');">
-              <button type="submit" class="btn catch-row_delete-btn">Delete</button>
-            </form>
-          {{/if}}
         </div>
-      </div>
+      </article>
     {{/each}}
   </div>
 </section>
