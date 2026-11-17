@@ -70,6 +70,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-right: 56px; /* Saves room for the floating BETA badge so header stays centered */
 }
 
 .brand__logo {
