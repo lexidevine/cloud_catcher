@@ -102,4 +102,13 @@ const uploadToCloudinary = (fileBuffer) => {
   });
 };
 
-module.exports = { uploadPhoto, cleanPhoto, isPhotoSafe, uploadToCloudinary };
+//Removes a photo from Cloudinary using its web address
+const deleteFromCloudinary = (imageUrl) => {
+  //Turns ".../cloud_catcher/abc123.jpg" into "cloud_catcher/abc123"
+  const publicId = imageUrl.split('/').slice(-2).join('/').split('.')[0];
+
+  return cloudinary.uploader.destroy(publicId);
+};
+
+module.exports = { uploadPhoto, cleanPhoto, isPhotoSafe, uploadToCloudinary, deleteFromCloudinary };
+

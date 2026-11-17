@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Sighting, User, CloudType } = require('../models');
 const withAuth = require('../utils/auth');
-const { uploadPhoto, cleanPhoto, isPhotoSafe, uploadToCloudinary } = require('../utils/upload'); 
+const { uploadPhoto, cleanPhoto, isPhotoSafe, uploadToCloudinary, deleteFromCloudinary } = require('../utils/upload'); 
 
 // Converts compass degrees (0-360) into a directional text (ex: "NE")
 function degreesToCompass(deg) {
@@ -23,8 +23,16 @@ router.get('/', async (req, res) => {
       order: [['name', 'ASC']],
     });
 
-    // Serialize sighting data so templates can read it
-    const sightings = sightingData.map((sighting) => sighting.get({ plain: true }));
+    // Who is looking at the page, and are they the admin?
+    const userId = req.session.user_id;
+    const isAdmin = userId === Number(process.env.ADMIN_USER_ID);
+
+    // Serialize sighting data, and mark which catches this person can delete
+    const sightings = sightingData.map((sighting) => {
+      const plainSighting = sighting.get({ plain: true });
+      plainSighting.canDelete = plainSighting.user_id === userId || isAdmin;
+      return plainSighting;
+    });
 
     // Serialize cloud type data so templates can read it
     const cloudTypes = cloudTypeData.map((cloudType) => cloudType.get({ plain: true }));
@@ -100,6 +108,45 @@ router.post('/', withAuth, uploadPhoto, async (req, res) => {
     console.log(err);
     req.session.uploadError = 'Oopsie! Something went wrong logging your catch. Please try again.';
 
+    req.session.save(() => {
+      res.redirect('/sightings');
+    });
+  }
+});
+
+//DELETE a Sighting
+router.post('/:id/delete', withAuth, async (req, res) => {
+  try {
+    const sighting = await Sighting.findByPk(req.params.id);
+    // If the catch doesn't exist, go back to Catches
+    if (!sighting) {
+      res.redirect('/sightings');
+      return;
+    }
+
+    const isOwner = sighting.user_id === req.session.user_id;
+    const isAdmin = req.session.user_id === Number(process.env.ADMIN_USER_ID);
+
+    // Stop if it's not your catch and you're not the admin
+    if (!isOwner && !isAdmin) {
+      req.session.uploadError = "Hey, that's not your cloud to let go!";
+      req.session.save(() => {
+        res.redirect('/sightings');
+      });
+      return;
+    }
+
+    // Remove the photo from Cloudinary first, if there is one
+    if (sighting.image_url) {
+      await deleteFromCloudinary(sighting.image_url);
+    }
+
+    await sighting.destroy();
+
+    res.redirect('/sightings');
+  } catch (err) {
+    console.log(err);
+    req.session.uploadError = 'Oopsie! That catch floated away before we could delete it. Please try again.';
     req.session.save(() => {
       res.redirect('/sightings');
     });

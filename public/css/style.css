@@ -318,6 +318,23 @@ body {
   gap: 6px 24px;
 }
 
+.catch-row__delete {
+  margin: 12px 0 0;
+  width: auto;
+}
+
+.catch-row__delete-btn {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 12px;
+  color: var(--muted);
+}
+
+.catch-row__delete-btn:hover {
+  border-color: var(--accent-pink);
+  color: #be185d;
+}
+
 @media (max-width: 640px) {
   .catch-row {
     flex-direction: column;

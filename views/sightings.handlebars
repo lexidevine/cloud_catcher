@@ -94,7 +94,13 @@
                 <span>{{sighting.weather_snapshot.air_pressure}} hPa</span>
               </div>
             {{/if}}
+          {{! Delete button }}
           </div>
+          {{#if sighting.canDelete}}
+            <form method="POST" action="/sightings/{{sighting.id}}/delete" class="catch-row__delete" onsubmit="return confirm('Let this cloud float away forever?');">
+              <button type="submit" class="btn catch-row_delete-btn">Delete</button>
+            </form>
+          {{/if}}
         </div>
       </div>
     {{/each}}
